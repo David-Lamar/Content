@@ -1,0 +1,37 @@
+
+// TODO: If no light source, need to prompt the player to let them know it's scary, etc.
+[oploc1,goblin_cave_entrance]
+
+if(testbit(%goblin_caves, 3) = ^true) {
+    // In https://www.youtube.com/watch?v=0fQ4ewyy_Ps there was no animation to climb down after the notice
+    //anim(human_pickupfloor, 0);
+    //p_delay(0);
+    p_telejump(0_49_149_33_35);
+} else {
+    mes("Looks like a long fall..."); // TODO: Real message
+}
+
+[oplocu,goblin_cave_entrance]
+if (last_useitem = rope) {
+    if(testbit(%goblin_caves, 3) = ^true) {
+        mes("There's no need to do that."); // TODO: Real message
+        return;
+    }
+
+    inv_del(inv, rope, 1);
+    %goblin_caves = setbit(%goblin_caves, 3);
+    mes("You use a rope on the hole."); // TODO: real message
+} else {
+    mes("Nothing interesting happens.");
+}
+
+[oploc1,swamp_cave_climbing_rope]
+anim(human_reachforladder, 0);
+p_delay(0);
+p_telejump(0_49_49_32_36);
+
+[oploc1,tog_cave_down]
+p_telejump(2_50_148_19_60);
+
+[oploc1,tog_cave_up]
+p_telejump(0_50_149_25_6);
