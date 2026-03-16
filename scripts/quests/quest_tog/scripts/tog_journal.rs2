@@ -1,0 +1,3 @@
+[if_button,questlist:tog]
+
+~quest_journal("Tears of Guthix", "TODO"); 
