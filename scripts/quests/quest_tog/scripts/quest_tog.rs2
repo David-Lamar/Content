@@ -1,0 +1,507 @@
+[oploc1,hidey_unbuilt_bush_easy]
+// TODO: this is what shows when you haven't started the quest.
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Tell me... a story...");
+@tog_a_story;
+
+// TODO: HOWEVER, once you've talked to her the first time, you get the "A story?" option/ tog_base
+
+
+
+
+
+
+
+[label,tog_base]
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Tell me... a story...");
+switch_int(~p_choice4("Okay...", 1, "A story?", 2, "You tell me a story.", 3, "Not now.", 4)) {
+    case 1 : @tog_start_quest;
+    case 2 : @tog_a_story;
+    case 3 : @tog_you_tell_me;
+    case 4 : @tog_not_now;
+}
+
+[label,tog_start_quest]
+~chatplayer("<p,neutral>Okay...");
+~send_quest_progress(questlist:tog, 1, 99); // TODO: Figure out how many TOG actually has
+// TODO: "You tell Juna some stories of your adventures."
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>");
+
+[label,tog_a_story]
+~chatplayer("<p,confused>A story?");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I have been waiting here three thousand years, guarding the Tears of Guthix. I serve my master faithfully, but I am bored.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>An adventurer such as yourself must have many tales to tell. If you can entertain me, I will let you into the cave for a time.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>The more I enjoy your story, the more time I will give you in the cave.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Then you can drink of the power of balance, which will make you stronger in whatever area you are weakest.");
+
+switch_int(~p_choice3("Okay...", 1, "Not now", 2, "What are the Tears of Guthix?", 3)) {
+    case 1 : @tog_start_quest;
+    case 2 : @tog_not_now;
+    case 3 : 
+        ~chatplayer("<p,neutral>What are the Tears of Guthix?");
+       @tog_explanation;
+}
+
+[label,tog_you_tell_me]
+~chatplayer("<p,neutral>You tell me a story.");
+switch_int(~p_choice2("Tell me about the Tears of Guthix", 1, "Tell me a new story", 2)) {
+    case 1 : @tog_tears_of_guthix;
+    case 2 : @tog_new_story;
+}
+
+[label,tog_tears_of_guthix]
+~chatplayer("<p,neutral>Tell me about the Tears of Guthix.");
+@tog_explanation;
+
+[label,tog_explanation]
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>The Third Age of the world was a time of great conflict, of destruction never seen before or since, when all the gods save Guthix warred for control.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>The colossal Wyrms, of whom today's dragons are a pale reflection, turned all the sky to fire, while on the ground armies of foot soldiers, goblins and trolls and humans, filled the valleys and plains with blood.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>In time the noise of the conflict woke Guthix from His deep slumber, and He rose and stood in the centre of the battlefield so that the splendour of His wrath filled the world, and He called for the conflict to cease!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Silence fell, for the gods knew that none could challenge the power of the mighty Guthix -- for His power is that of nature itself, to which all other things are subject, in the end.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Guthix reclaimed that which had been stolen from Him, and went back underground to return to His sleep and continue to draw the world's power into Himself.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>But on His way into the depths of the earth He sat and rested in this cave; and, thinking of the battle-scarred desert that now stretched from one side of His world to the other, He wept.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>And so great was His sorrow, and so great was His life- giving power, that the rocks themselves began to weep with Him.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Later, Guthix noticed that the rocks continued to weep, and that their tears were infused with a small part of His power.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>So He set me, His servant, to guard the cave, and He entrusted to me the task of judging who was and was not worthy to access the tears.");
+
+
+[label,tog_new_story]
+~chatplayer("<p,neutral>Tell me a new story.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I have already told you my story, and you have not told me yours!");
+@tog_base;
+
+[label,tog_not_now]
+~chatplayer("<p,neutral>Not now.");
+
+
+
+// ----------------------------------------------- Quest Specific Dialogs
+
+[label,tog_between_rock]
+~chatplayer("<p,neutral>... I had to be shot out of a cannon into a rock! But finally I banished the spirit of the rock and Dondakan could mine his gold.");
+
+[label,tog_big_compy]
+~chatplayer("<p,neutral>... Poor Rantz was so clumsy he couldn't shoot anything! But I managed to kill the Chompy Bird.");
+
+[label,tog_biohazard]
+~chatplayer("<p,neutral>... So it turned out there was no plague after all!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Deception of the people by their rulers is a terrible thing.");
+
+[label,tog_black_knights]
+~chatplayer("<p,neutral>... So in the end the Black Knights were defeated by cabbage!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>One should never underestimate the uses of the vegetables of Guthix.");
+
+[label,tog_cabin_fever]
+~chatplayer("<p,neutral>... So I holed the enemy ship with another cannon shot, and the Adventurous sailed triumphantly into Mos Le'Harmless!");
+
+[label,tog_clock_tower]
+~chatplayer("<p,neutral>... So it was I who repaired the clock tower.");
+
+[label,tog_cook]
+~chatplayer("<p,neutral>... and in the end I found all the ingredients, so the Duke of Lumbridge had a birthday cake after all.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Ah, a happy ending. It would not be good for such an anniversary to go unmarked.");
+
+[label,tog_fenkenstrain]
+~chatplayer("<p,neutral>... But in the end I stopped Fenkenstrain from continuing his horrible experiments.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>With the power to create life comes responsibility. I see that Fenkenstrain was not up to the task.");
+
+[label,tog_death_plateau]
+~chatplayer("<p,neutral>... So from then on the Imperial Guard was able to access Death Plateau safely and take the trolls by surprise.");
+
+[label,tog_demon_slayer]
+~chatplayer("<p,neutral>... So I destroyed the demon Delrith and saved Varrock!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I remember Delrith. A most unpleasant character; I am glad he has been dispatched.");
+
+[label,tog_desert_treasure]
+~chatplayer("<p,neutral>... In the pyramid I discovered a whole new set of magic spells!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I suggest you think about the origin of those spells. Ancient magics are not to be toyed with.");
+
+[label,tog_devious_minds]
+~chatplayer("<p,neutral>... So it was me who accidentally brought a teleport beacon onto Entrana! But the Temple Knights are investigating so it should all be all right.");
+
+[label,tog_dig_site]
+~chatplayer("<p,neutral>... and the examiner was very impressed that I had discovered an ancient altar of Zaros.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Zaros? I had not heard that name for a thousand years even before the start of my sojourn here.");
+
+[label,tog_doric]
+~chatplayer("<p,neutral>... So once I had got all the ores he wanted, Doric let me use his anvils.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Such a small task hardly seems worthy of the term 'quest'.");
+
+[label,tog_dragon_slayer]
+~chatplayer("<p,neutral>... So with Elvarg the dragon dead, the master of the Champions' Guild let me in, and I was able to wear Rune Plate!");
+
+[label,tog_druid]
+~chatplayer("<p,neutral>... So Kaqemeex taught me how to use the Herblore skill.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>A generous reward indeed.");
+
+[label,tog_dwarf_cannon]
+~chatplayer("<p,neutral>... and that was how I fixed the Dwarf multicannon.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>So war still rages in the world above? Will you never tire of creating machines of destruction?");
+
+[label,tog_eadgar]
+~chatplayer("<p,neutral>... Eadgar's ruse was absurd, but it worked! The trolls ate a fake human, and I got the herb for the druids' ritual.");
+
+[label,tog_elemental_workshop]
+~chatplayer("<p,neutral>... and once I had repaired the Elemental Workshop I was able to make an Elemental Shield.");
+
+[label,tog_enakhra]
+~chatplayer("<p,neutral>... and then Akthanakos and Enakhra went away to the north to continue fighting!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>A battle between two such powerful beings will take much time and unleash much energy. I hope that the natural world is not damaged in this conflict!");
+
+[label,tog_ernest]
+~chatplayer("<p,neutral>... So once I had found all the parts for the machine, poor Ernest could be himself once more.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>That was a good deed. It is a terrible thing to be locked out of one's natural form.");
+
+[label,tog_fairy_tale_1]
+~chatplayer("<p,neutral>... So I defeated the tanglefoot and returned the Fairy Queen's Enchanted Secateurs to the Fairy Godfather.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>These fairies seem to be well versed in the powers of nature.");
+
+[label,tog_family_crest]
+~chatplayer("<p,neutral>... So all three parts of the family crest were reunited.");
+
+[label,tog_feud]
+~chatplayer("<p,neutral>...So despite the failure of my original task, Ali Morrisane was very happy about his nephew's fortunes.");
+
+[label,tog_fight_arena]
+~chatplayer("<p,neutral>... and I defeated General Khazard, and won the Servils their freedom!");
+
+[label,tog_fishing_contest]
+~chatplayer("<p,neutral>... and after I had won the fishing contest, the Dwarves let me go under White Wolf Mountain.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Fishing? A strange test of worthiness to pass through an underground tunnel!");
+
+[label,tog_forgettable]
+~chatplayer("<p,neutral>... I think I did something with a drunken dwarf... but I can't remember what.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>You must be careful not to let drink muddle your brain!");
+
+[label,tog_fremennik_trials]
+// TODO: Insert the fremennik name
+~chatplayer("<p,neutral>... and that was how I became an honourary member the Fremennik, and was given my Fremennik name, [Fremennik name].");
+
+[label,tog_gertrude]
+~chatplayer("<p,neutral>...I returned Fluffs safely to Gertrude, and then she gave me a cat of my own!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Cats are one of the most mysterious creatures of Guthix. I hope you take your responsibility seriously.");
+
+[label,tog_ghosts_ahoy]
+~chatplayer("<p,neutral>... So the people of Port Phasmatys were finally able to rest.");
+
+[label,tog_giant_drawf]
+~chatplayer("<p,neutral>... So the statue in Keldagrim was rebuilt, and I witnessed a meeting of the Consortium of mining companies.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I have a feeling that Keldagrim will be the setting of many great adventures for you.");
+
+[label,tog_goblin_dip]
+~chatplayer("<p,neutral>... So the goblins ended up wearing the armour colour they had to start off with!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Poor silly goblins! Their race had such potential, if only they could rise above their petty squabbles.");
+
+[label,tog_golem]
+~chatplayer("<p,neutral>... and I had to reprogram the golem before it would believe that the demon was dead.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I remember well the battle of Uzer.");
+
+[label,tog_grand_tree]
+~chatplayer("<p,neutral>... Glough fled like the coward he really is, and the Grand Tree was saved!");
+
+[label,tog_hand_in_sand]
+~chatplayer("<p,neutral>... So that was how I gave Bert a hand solving the murder and returned the wizard's head to solve the riddle of the ever full sand pits!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>A victim dies and a murderer is punished. That is balance.");
+
+[label,tog_haunted_mine]
+~chatplayer("<p,neutral>... and from the legendary crystals I cut a salve shard to fight the undead.");
+
+[label,tog_hazeel]
+// TODO: Check if the player stopped the cultists
+// TODO: If so:
+~chatplayer("<p,neutral>... So that was how I foiled the cultists in their plan to resurrect Hazeel.");
+// TODO: Else 
+~chatplayer("<p,neutral>... So that was how I helped return Hazeel to his followers.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>So the vile Mahjarrat still walk the earth above? Then Zamorak's defeat was not as thorough as I had thought.");
+
+[label,tog_hero]
+~chatplayer("<p,neutral>... So after I had retrieved all the items, I became a member of the Heroes' Guild!");
+
+[label,tog_holy_grail]
+~chatplayer("<p,neutral>... and out of all the Knights of the Round Table, it was I who found the Holy Grail.");
+
+[label,tog_horror_deep]
+~chatplayer("<p,neutral>... and that was the end of the horror from the deep!");
+
+[label,tog_icthlarin]
+~chatplayer("<p,neutral>... and with the amulet I received, I could understand the language of cats!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>It is a rare privilege to understand the language of those beings. You should listen carefully to all that they say - but not believe too much of it.");
+
+[label,tog_imp_catch]
+~chatplayer("<p,neutral>... It took some time, but I finally got all four beads back, and Mizgog gave me my reward.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Imps! I remember the age of great war, when armies of Zamorak's imps bloodied the ankles of the other gods' creatures.");
+
+[label,tog_aid_myreque]
+~chatplayer("<p,neutral>... Veliaf was very impressed by the 'Rod of Ivandis', and I can use it to kill Juves and the Juvinates!");
+
+[label,tog_search_myreque]
+~chatplayer("<p,neutral>... So I suppose it was my fault that the young members of the Myreque were killed by Vanstrom.");
+
+[label,tog_jungle_potion]
+~chatplayer("<p,neutral>... and once I had gathered all the herbs, Trufitus Shakaya was able to commune with his gods.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>");
+
+[label,tog_knights_sword]
+~chatplayer("<p,neutral>... So that was how I found the Imcando Dwarves and got the Knight a new sword.");
+
+[label,tog_legends]
+~chatplayer("<p,neutral>... and when I had completed all the tasks, I became a member of the Legends' Guild!");
+
+[label,tog_lost_city]
+~chatplayer("<p,neutral>... and when I entered the door carrying the Dramen Staff, I was transported to a whole new world -- a world populated by magical fairies!");
+
+[label,tog_lost_tribe]
+~chatplayer("<p,neutral>... So Sigmund was dismissed, and the duke and ruler of the cave goblins signed a peace treaty.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>The Dorgeshuun goblins have been good neighbors during my vigil here. They are a timid race, but not cowardly, and I am glad they have the peace they desire.");
+
+[label,tog_making_history]
+~chatplayer("<p,neutral>... so that's how the Outpost was saved and converted into a museum.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>By remembering the past, one should be able to avoid repeating its mistakes. Yet the mortal races show no sign of abandoning their obsession with war and bloodshed.");
+
+[label,tog_merlin_crystal]
+~chatplayer("<p,neutral>... and when I told King Arthur that I had single-handedly freed Merlin from his crystal prison, he made me a Knight of the Round Table!");
+
+[label,tog_monk_friend]
+~chatplayer("<p,neutral>... and the monks threw a big birthday party for the child, with lots of wine.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I hope they supplied something more suitable for the child to drink.");
+
+[label,tog_monkey_madness]
+~chatplayer("<p,neutral>... so I defeated the Jungle Demon and stopped the Monkeys' plot to take over Karamja.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I see they couldn't make a monkey out of you!");
+~chatplayer("<p,neutral>Well, actually, I was a monkey for a bit.");
+
+[label,tog_mountain_daughter]
+~chatplayer("<p,neutral>... I was too late to save the chieftain's daughter, but at least I gave her a proper burial.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Brief is life, but more precious if its passing is properly honoured.");
+
+[label,tog_mournings_end_1]
+~chatplayer("<p,neutral>... So that's how I found out about the lost temple in the mountains that the mourners were searching for.");
+
+[label,tog_mournings_end_2]
+~chatplayer("<p,neutral>... What kind of twisted mind would come up with the light-beam puzzle in that temple?");
+
+[label,tog_murder_mystery]
+~chatplayer("<p,neutral>... and that's how I solved the murder of Lord Sinclair.");
+
+[label,tog_nature_spirit_1]
+~chatplayer("<p,neutral>... thus Filliman Tarlock became a Nature Spirit!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>That is a fitting reward for a dedicated servant of Guthix. Thank you for helping him.");
+
+[label,tog_nature_spirit_2]
+~chatplayer("<p,neutral>... So that was how I helped Filliman Tarlock transform into a Nature Spirit.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>It is good that you have helped a servant of Guthix to his rest.");
+
+[label,tog_observatory]
+~chatplayer("<p,neutral>... and when I had fixed the telescope, I looked through and saw the stars.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>It is long since I have seen the stars...");
+
+[label,tog_small_favour]
+~chatplayer("<p,neutral>... I still can't believe how long that 'one small favour' took me! I ended up walking all over the world doing small favours for all and sundry!");
+
+[label,tog_pirate_treasure]
+~chatplayer("<p,neutral>... and when I dug in the middle of the park in Falador, I found the pirate's treasure!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Such is ever the folly of pirates, the bury their loot in the ground so that another can dig it up.");
+
+[label,tog_plague_city]
+~chatplayer("<p,neutral>... and that was how I rescued Elena from West Ardougne.");
+
+[label,tog_priest_peril]
+~chatplayer("<p,neutral>... But with Drezel's help I was able to purify the Salve.");
+
+[label,tog_ali_rescue]
+~chatplayer("<p,neutral>... and I had to disguise Prince Ali in order to smuggle him out!");
+
+[label,tog_rag_bone]
+~chatplayer("<p,neutral>... So I fetched all the bones the Odd Old Man wanted, and he gave me a reward!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>What could that man have wanted all those bones for? Collecting that many bones cannot be a balanced activity.");
+
+[label,tog_ratcatchers]
+~chatplayer("<p,neutral>... Those rat-catchers are odd people. But by the end of it I had caught a huge number of rats all over Gielinor!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Rats are a highly unbalanced creature and it is right that their numbers be controlled.");
+
+[label,tog_recipe_disaster]
+~chatplayer("<p,neutral>... So after I had freed all the dinner guests I was finally able to face the Culinaromancer and put an end to his mad schemes!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>That evil wizard's time spells sent a ripple through the fabric of balance. I am glad he is no longer at large!");
+
+[label,tog_recruitment_drive]
+~chatplayer("<p,neutral>... So I figured out their weird puzzles, and the Temple Knights asked me to join as an initiate member!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I have heard tales of these 'Temple Knights' from many years past. Be wary, their motivations are not what they might lead you to believe.");
+
+[label,tog_regicide]
+~chatplayer("<p,neutral>... I returned to tell King Lathas that the assassination was successful, and he rewarded me.");
+
+[label,tog_restless_ghost]
+~chatplayer("<p,neutral>... and once I returned the skull, the ghost was able to rest.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>A strange attachment to an item that has no use after one's death.");
+
+[label,tog_romeo_juliet]
+~chatplayer("<p,neutral>... I gave the message to Romeo, but he misunderstood, so they never were together.");
+// TODO: Make sure | results in a line break
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Never was a story of more woe|That this of Juliet and her Romeo.");
+
+[label,tog_roving_elves]
+~chatplayer("<p,neutral>... and when I planted the shard, it grew into a crystal tree!");
+
+[label,tog_rum_deal]
+~chatplayer("<p,neutral>... So that was how I helped keep the zombie pirates drunk!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Drunken zombie pirates? What is the world coming to?");
+
+[label,tog_rune_mysteries]
+~chatplayer("<p,neutral>... So I brought Aubury's notes to Sedridor the Head Wizard, and from then on I was able to mine Rune Essence.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>So the mortals above have discovered magic once more? Very interesting.");
+
+[label,tog_scorpion_catcher]
+~chatplayer("<p,neutral>... I would never have thought that three scorpions would take that long to find!");
+
+[label,tog_sea_slug]
+~chatplayer("<p,neutral>... and that was how I rescued Caroline's family from the Sea Slugs.");
+
+[label,tog_shades_mortton]
+~chatplayer("<p,neutral>... So Mort'ton returned pretty much to normal, and I was able to put the shades to rest.");
+
+[label,tog_shadow_storm]
+~chatplayer("<p,neutral>... So Denath was Agrith-Naar all along! But I managed to summon the demon again and slay him.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Agrith-Naar was one of the demons my master banished at the end of the great war. It seems he found a way to work around the ban on direct intervention.");
+
+[label,tog_sheep_herder]
+~chatplayer("<p,neutral>... and I incinerated the bones of the sheep in the furnace.");
+
+[label,tog_sheep_shear]
+~chatplayer("<p,neutral>... Shearing all those sheep was hard work, but the pay was good!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Nature gave sheep their wool for a reason, you know. I hope they were not too cold.");
+
+[label,tog_shield_of_arrav]
+~chatplayer("<p,neutral>... So that's how I helped return the Shield of Arrav.");
+
+[label,tog_shilo]
+~chatplayer("<p,neutral>... So what Rashiliyia wanted all along was to be reunited with her son in the afterlife.");
+
+[label,tog_souls_bane]
+~chatplayer("<p,neutral>...So I defeated all the monsters in Tolna's subconscious and he escaped from the rift.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>The most fearsome monsters are to be found in the darkness of our own minds.");
+
+[label,tog_spirits_elid]
+~chatplayer("<p,neutral>... So it turned out that the people of Nardah were dying of thirst because the spirits of the Elid had cursed them for turning away from their goddess.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>It is a terrible thing for people to turn away from their religion. I think the spirits taught the town a lesson.");
+
+[label,tog_swan_song]
+~chatplayer("<p,neutral>... So the Wise Old Man said it was time for him to retire, and he left the Colony and went home. He gave me loads of XP, but he wouldn't let me have his hat!");
+// TODO: Insert player name here
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>A hat is just a hat, [player name].");
+~chatplayer("<p,neutral>Grrr!");
+
+[label,tog_tai_bwo]
+~chatplayer("<p,neutral>... So that was how I helped the people of Tai Bwo Wannai village return.");
+
+[label,tog_tail_cats]
+~chatplayer("<p,neutral>...now Bob and Neite are very happy together!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Bob the Cat? I have heard of that strange creature but have never been able to fathom him. It is no small achievement for you to be able to!");
+
+[label,tog_tog_lol]
+~chatplayer("<p,neutral>... so you said you'd look after my bowl for me, and let me access the Tears if I kept telling you stories.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I knew that story already, in fact, but I suppose your own perspective of the events is a valid tale in itself.");
+
+[label,tog_temple_ikov]
+// TODO: If player killed Lucien
+~chatplayer("<p,neutral>... I killed Lucien and banished him from the world!");
+// TODO: Else
+~chatplayer("<p,neutral>... Lucien said that the Staff of Armadyl I gave him had made him more powerful.");
+
+[label,tog_misc]
+// TODO: Gendered word
+~chatplayer("<p,neutral>... So that was how I became [King/Queen] of Miscellania!");
+
+[label,tog_tourist_trap]
+~chatplayer("<p,neutral>... Ana wasn't too happy to be cooped up in that barrel! But at least I got her out of the mining camp.");
+
+[label,tog_gnome_village]
+~chatplayer("<p,neutral>... and King Bolren thanked me for defeating the warlord and returning the orbs to the gnome people.");
+
+[label,tog_tribal_totem]
+~chatplayer("<p,neutral>... So I returned the totem, and the Rantuki tribe rewarded me for my help.");
+
+[label,tog_troll_romance]
+~chatplayer("<p,neutral>... So Ug and Aga lived happily ever after.");
+
+[label,tog_troll_stronghold]
+~chatplayer("<p,neutral>... and after I had rescued Godric, Dunstan gave me the Law Talisman as a reward!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>");
+
+[label,tog_underground_pass]
+~chatplayer("<p,neutral>... I don't know who put all those traps in the underground pass!");
+
+[label,tog_vampire_slayer]
+~chatplayer("<p,neutral>... and once the vampyre was dead, the people of Draynor no longer lived in fear.");
+
+[label,tog_wanted]
+~chatplayer("<p,neutral>... and after I finally managed to track him down, let me tell you, that Solus Dellagar fellow was almost as powerful as he was insane!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Yes, it seems he sacrificed his sanity for power. Power often comes with a cost, and the highest cost is often the one you do not immediately see...");
+
+[label,tog_watchtower]
+~chatplayer("<p,neutral>... and with the shield generator working, the ogres could never threaten Yanille again.");
+
+[label,tog_waterfall]
+~chatplayer("<p,neutral>... and that was how I retrieved the treasure from the waterfall.");
+
+[label,tog_witch_house]
+~chatplayer("<p,neutral>... All that trouble just to get a ball out of someone's garden!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>It is often hard to know how long a task will take when we begin it.");
+
+[label,tog_witch_potion]
+~chatplayer("<p,neutral>... and once I got her all the ingredients, Hetty's potion increased my magical power!");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>I see you are on your way to becoming strong in the magical arts.");
+
+[label,tog_flesh_eaters]
+~chatplayer("<p,neutral>... Those Zogres were disgusting! But I learned how to fight them with brutal arrows and disease balm.");
+~chatnpc_specific(nc_name(tog_juna_dummy), tog_juna_dummy, "<p,neutral>Zombie Ogres!? Some of the foulest creatures of Zamorak. In the great wars the zogre armies could repel the forces of Saradomin with their stench alone!");
+
+// ---------------------------------------------------------- Mechanics
+
+
+
+
+[oploc1,tog_blue_stone_rocks2] @mining_firstswing(tog_mine_rocks);
+
+[label,tog_mine_rocks]
+inv_add(inv, tog_stone, 1);
+
+
+[oploc1,tog_blue_stone_rocks1]
+if (inv_freespace(inv) < 1) {
+    anim(null, 0);
+    ~mesbox("Your inventory is too full."); // TODO: real message
+    return;
+}
+
+if (stat_base(mining) < 20) {
+    ~mesbox("You need a mining level of 20 to mine this rock."); // TODO: ensure this is right
+    return;
+}
+
+def_obj $pickaxe = ~pickaxe_checker;
+if ($pickaxe = null) {
+    anim(null, 0);
+    ~mesbox("You need a pickaxe to mine this rock. You do not have a pickaxe which you have the Mining level to use.");
+    return;
+}
+
+mes("You swing your pick at the rock.");
+inv_add(inv, tog_stone, 1);
+p_oploc(3);
+
+// TODO: Check that they have a pick
+// TODO: Check to make sure that they don't already have a stone or a bowl
+// TODO:
+
+[opheldu,tog_stone]
+if (last_useitem = chisel) {
+    inv_del(inv, tog_stone, 1);
+    inv_add(inv, tog_bowl, 1);
+} else {
+    mes("Nothing interesting happens.");
+}
+
+
+// TODO: Make sure it was a chisel...
+// TODO: Check crafting level? Does this require a crafting level?
+// TODO: Check to ensure the player has told Juna a story
+
